@@ -21,9 +21,9 @@ import java.io.Serializable;
  */
 public class Message implements Serializable {
     private String type;
-    private String content;
+    private DVD content;
 
-    public Message(String type, String content) {
+    public Message(String type, DVD content) {
         this.type = type;
         this.content = content;
     }
@@ -36,11 +36,11 @@ public class Message implements Serializable {
         this.type = type;
     }
 
-    public String getContent() {
+    public DVD getContent() {
         return content;
     }
 
-    public void setContent(String content) {
+    public void setContent(DVD content) {
         this.content = content;
     }
 }

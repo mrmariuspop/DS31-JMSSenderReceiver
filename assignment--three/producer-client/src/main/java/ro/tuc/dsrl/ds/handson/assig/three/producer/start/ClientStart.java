@@ -3,7 +3,7 @@ package ro.tuc.dsrl.ds.handson.assig.three.producer.start;
 import java.io.IOException;
 
 import ro.tuc.dsrl.ds.handson.assig.three.producer.connection.QueueServerConnection;
-import ro.tuc.dsrl.ds.handson.assig.three.producer.entities.DVD;
+import ro.tuc.dsrl.ds.handson.assig.three.queue.communication.DVD;
 
 /**
  * @Author: Technical University of Cluj-Napoca, Romania
@@ -22,11 +22,15 @@ public class ClientStart {
 	private ClientStart() {
 	}
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) {
 		QueueServerConnection queue = new QueueServerConnection(HOST, PORT);
 
-				DVD dv1 = new DVD("Mortal Kombat XXL", 2010, 50);
-				queue.writeMessage(dv1.toString());
-		} 
+		try {
+			for (int i=0;i<5;i++) {
+				queue.writeMessage(new DVD("aaa", i, 2.0));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-
+}

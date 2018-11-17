@@ -1,15 +1,10 @@
 package ro.tuc.dsrl.ds.handson.assig.three.consumer.start;
 
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-
-import javax.crypto.SecretKey;
-import javax.crypto.spec.SecretKeySpec;
 
 import ro.tuc.dsrl.ds.handson.assig.three.consumer.connection.QueueServerConnection;
-import ro.tuc.dsrl.ds.handson.assig.three.consumer.service.EncryptionTools;
 import ro.tuc.dsrl.ds.handson.assig.three.consumer.service.MailService;
+import ro.tuc.dsrl.ds.handson.assig.three.queue.communication.DVD;
 
 /**
  * @Author: Technical University of Cluj-Napoca, Romania
@@ -26,28 +21,17 @@ public class ClientStart {
 	private ClientStart() {
 	}
 
-	public static void main(String[] args) throws Exception {
-		
-		//encryption related
-		String k = "Bar12345Bar12345";
-		SecretKey key = new SecretKeySpec(k.getBytes(), "AES");
-        EncryptionTools encrypter = new EncryptionTools(key);
-        
+	public static void main(String[] args) {
 		QueueServerConnection queue = new QueueServerConnection("localhost",8888);
-		MailService mailService = new MailService("mpop993@gmail.com",encrypter.decrypt("OXF74PCOzeHuVus3YVc6xg=="));
-		String message;
+
+		MailService mailService = new MailService("projectmail200@gmail.com","parola+123");
+		DVD message;
 
 		while(true) {
 			try {
 				message = queue.readMessage();
-				System.out.println("DVD information : "+message);
-				mailService.sendMail("mrmariuspop@gmail.com","New DVD Added",message);
-				
-				//print to file
-				 FileWriter fileWriter = new FileWriter("message.txt");
-				    PrintWriter printWriter = new PrintWriter(fileWriter);
-				    printWriter.printf(message);
-				    printWriter.close();
+				System.out.println("Sending mail "+message);
+				mailService.sendMail("projectmail200@gmail.com","Dummy Mail Title",message);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

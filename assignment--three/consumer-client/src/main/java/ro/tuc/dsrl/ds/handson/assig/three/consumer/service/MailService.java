@@ -1,9 +1,16 @@
 package ro.tuc.dsrl.ds.handson.assig.three.consumer.service;
 
-import javax.mail.*;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.Properties;
+
+import ro.tuc.dsrl.ds.handson.assig.three.queue.communication.DVD;
 
 /**
  * @Author: Technical University of Cluj-Napoca, Romania
@@ -48,7 +55,7 @@ public class MailService {
      * @param subject subject of the email
      * @param content content of the email
      */
-    public void sendMail(String to, String subject, String content) {
+    public void sendMail(String to, String subject, DVD content) {
         Session session = Session.getInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
@@ -63,7 +70,7 @@ public class MailService {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(to));
             message.setSubject(subject);
-            message.setText(content);
+            message.setText(content.toString());
 
             Transport.send(message);
 

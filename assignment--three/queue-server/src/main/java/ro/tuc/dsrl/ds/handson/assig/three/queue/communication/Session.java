@@ -56,7 +56,7 @@ public class Session extends Thread {
 					try {
 						//retrieve a message from the queue
 						//since the underlying queue is a BlockingQueue, this method call will wait if the queue is empty
-						String content = Queue.getInstance().get();
+						DVD content = Queue.getInstance().get();
 						sendMessageToClient(new Message("ACK",content));
 					} catch (InterruptedException e) {
 						e.printStackTrace();

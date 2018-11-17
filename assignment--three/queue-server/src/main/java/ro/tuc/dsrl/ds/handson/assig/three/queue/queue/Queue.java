@@ -3,6 +3,8 @@ package ro.tuc.dsrl.ds.handson.assig.three.queue.queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
+import ro.tuc.dsrl.ds.handson.assig.three.queue.communication.DVD;
+
 /**
  * @Author: Technical University of Cluj-Napoca, Romania
  *          Distributed Systems, http://dsrl.coned.utcluj.ro/
@@ -19,10 +21,10 @@ import java.util.concurrent.LinkedBlockingDeque;
  */
 public class Queue {
     private static Queue queueInstance;
-    private BlockingQueue<String> queue;
+    private BlockingQueue<DVD> queue;
 
     private Queue() {
-        queue = new LinkedBlockingDeque<String>();
+        queue = new LinkedBlockingDeque<DVD>();
     }
 
     public static Queue getInstance() {
@@ -30,11 +32,11 @@ public class Queue {
         return queueInstance;
     }
 
-    public void put(String message) throws InterruptedException {
+    public void put(DVD message) throws InterruptedException {
         queue.put(message);
     }
 
-    public String get() throws InterruptedException {
+    public DVD get() throws InterruptedException {
         return queue.take();
     }
 }

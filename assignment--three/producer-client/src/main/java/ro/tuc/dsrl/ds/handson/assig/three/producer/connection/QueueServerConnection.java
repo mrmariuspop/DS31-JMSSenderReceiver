@@ -1,11 +1,12 @@
 package ro.tuc.dsrl.ds.handson.assig.three.producer.connection;
 
-import ro.tuc.dsrl.ds.handson.assig.three.queue.communication.Message;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+
+import ro.tuc.dsrl.ds.handson.assig.three.queue.communication.DVD;
+import ro.tuc.dsrl.ds.handson.assig.three.queue.communication.Message;
 
 /**
  * @Author: Technical University of Cluj-Napoca, Romania
@@ -33,7 +34,7 @@ public class QueueServerConnection {
 	 * @return the status of the operation (true == successful)
 	 * @throws IOException thrown if there is a problem with the connection
 	 */
-	public boolean writeMessage(String messageToSend) throws IOException {
+	public boolean writeMessage(DVD messageToSend) throws IOException {
 		Socket clientSocket = new Socket(host, port);
 		ObjectOutputStream outToServer = new ObjectOutputStream(clientSocket.getOutputStream());
 		ObjectInputStream inFromServer = new ObjectInputStream(clientSocket.getInputStream());
@@ -62,7 +63,7 @@ public class QueueServerConnection {
 	 * @return the message from the queue, sent by the server
 	 * @throws IOException thrown if there is a problem with the connection
 	 */
-	public String readMessage() throws IOException {
+	public DVD readMessage() throws IOException {
 		Socket clientSocket = new Socket(host, port);
 		ObjectOutputStream outToServer = new ObjectOutputStream(clientSocket.getOutputStream());
 		ObjectInputStream inFromServer = new ObjectInputStream(clientSocket.getInputStream());
